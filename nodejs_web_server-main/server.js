@@ -34,8 +34,10 @@ const serveFile = async (filePath, contentType, response) => {
     }
 }
 
+// create Server
 const server = http.createServer((req, res) => {
     console.log(req.url, req.method);
+// Added my name
     console.log("Lim youbin");
     myEmitter.emit('log', `${req.url}\t${req.method}`, 'reqLog.txt');
 
@@ -66,10 +68,11 @@ const server = http.createServer((req, res) => {
             contentType = 'text/html';
     }
 
+    // content views
     let filePath =
         contentType === 'text/html' && req.url === '/'
-            ? path.join(__dirname, 'views', 'index.html')
-            : contentType === 'text/html' && req.url.slice(-1) === '/'
+            ? path.join(__dirname, 'views', 'index.html')  // if text/htm/, go to index.html
+            : contentType === 'text/html' && req.url.slice(-1) === '/'   
                 ? path.join(__dirname, 'views', req.url, 'index.html')
                 : contentType === 'text/html'
                     ? path.join(__dirname, 'views', req.url)
@@ -84,7 +87,7 @@ const server = http.createServer((req, res) => {
         serveFile(filePath, contentType, res);
     } else {
         switch (path.parse(filePath).base) {
-            case 'old-page.html':
+            case 'old-page.html':       // if old-page.html, go to new-page.html
                 res.writeHead(301, { 'Location': '/new-page.html' });
                 res.end();
                 break;
@@ -92,7 +95,7 @@ const server = http.createServer((req, res) => {
                 res.writeHead(301, { 'Location': '/' });
                 res.end();
                 break;
-            default:
+            default:    
                 serveFile(path.join(__dirname, 'views', '404.html'), 'text/html', res);
         }
     }
