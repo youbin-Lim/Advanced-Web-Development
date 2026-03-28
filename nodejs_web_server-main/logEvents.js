@@ -6,11 +6,15 @@ const fsPromises = require('fs').promises;
 const path = require('path');
 
 const logEvents = async (message, logName) => {
+    //write daytime
     const dateTime = `${format(new Date(), 'yyyyMMdd\tHH:mm:ss')}`;
+    //write random ID
     const logItem = `${dateTime}\t${uuid()}\t${message}\n`;
-
+    
+    //find log file
     try {
         if (!fs.existsSync(path.join(__dirname, 'logs'))) {
+            // wirte log file
             await fsPromises.mkdir(path.join(__dirname, 'logs'));
         }
 
@@ -19,5 +23,5 @@ const logEvents = async (message, logName) => {
         console.log(err);
     }
 }
-
+//export file
 module.exports = logEvents;

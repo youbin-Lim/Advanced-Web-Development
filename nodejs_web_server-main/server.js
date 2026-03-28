@@ -11,36 +11,43 @@ const myEmitter = new Emitter();
 myEmitter.on('log', (msg, fileName) => logEvents(msg, fileName));
 const PORT = process.env.PORT || 3500;
 
+//read file and send response to client
 const serveFile = async (filePath, contentType, response) => {
     try {
+        // read the file and sense the content type
         const rawData = await fsPromises.readFile(
             filePath,
             !contentType.includes('image') ? 'utf8' : ''
         );
+        //if it is JSON parse it
         const data = contentType === 'application/json'
             ? JSON.parse(rawData) : rawData;
+        // if it is 404.html, 404 else is 200
         response.writeHead(
             filePath.includes('404.html') ? 404 : 200,
             { 'Content-Type': contentType }
         );
+        // if it is JSON, stringfy, end the response.
         response.end(
             contentType === 'application/json' ? JSON.stringify(data) : data
         );
+      //catch error
     } catch (err) {
         console.log(err);
+        //emit
         myEmitter.emit('log', `${err.name}: ${err.message}`, 'errLog.txt');
         response.statusCode = 500;
         response.end();
     }
 }
 
-// create Server
 const server = http.createServer((req, res) => {
+    // write the log file
     console.log(req.url, req.method);
-// Added my name
     console.log("Lim youbin");
+    //emit
     myEmitter.emit('log', `${req.url}\t${req.method}`, 'reqLog.txt');
-
+    // .html
     const extension = path.extname(req.url);
 
     let contentType;
@@ -67,12 +74,11 @@ const server = http.createServer((req, res) => {
         default:
             contentType = 'text/html';
     }
-
-    // content views
+    // create file path
     let filePath =
         contentType === 'text/html' && req.url === '/'
-            ? path.join(__dirname, 'views', 'index.html')  // if text/htm/, go to index.html
-            : contentType === 'text/html' && req.url.slice(-1) === '/'   
+            ? path.join(__dirname, 'views', 'index.html')
+            : contentType === 'text/html' && req.url.slice(-1) === '/'
                 ? path.join(__dirname, 'views', req.url, 'index.html')
                 : contentType === 'text/html'
                     ? path.join(__dirname, 'views', req.url)
@@ -80,14 +86,16 @@ const server = http.createServer((req, res) => {
 
     // makes .html extension not required in the browser
     if (!extension && req.url.slice(-1) !== '/') filePath += '.html';
-
+    
+    //check if file exist
     const fileExists = fs.existsSync(filePath);
 
     if (fileExists) {
         serveFile(filePath, contentType, res);
     } else {
         switch (path.parse(filePath).base) {
-            case 'old-page.html':       // if old-page.html, go to new-page.html
+            //redirect
+            case 'old-page.html':
                 res.writeHead(301, { 'Location': '/new-page.html' });
                 res.end();
                 break;
@@ -95,7 +103,7 @@ const server = http.createServer((req, res) => {
                 res.writeHead(301, { 'Location': '/' });
                 res.end();
                 break;
-            default:    
+            default:
                 serveFile(path.join(__dirname, 'views', '404.html'), 'text/html', res);
         }
     }
