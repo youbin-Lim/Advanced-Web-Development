@@ -1,0 +1,26 @@
+[
+  {
+    "developerId": "dev001",
+    "name": "Dwight Fairfield",
+    "email": "dwight.Fairfield@example.com",
+    "department": "Frontend"
+  },
+  {
+    "developerId": "dev002",
+    "name": "Sophia Turner",
+    "email": "sophia.turner@example.com",
+    "department": "Backend"
+  },
+  {
+    "developerId": "dev003",
+    "name": "Olivia Green",
+    "email": "olivia.green@example.com",
+    "department": "Fullstack"
+  },
+  {
+    "developerId": "dev004",
+    "name": "Liam Carter",
+    "email": "liam.carter@example.com",
+    "department": "Mobile"
+  }
+]

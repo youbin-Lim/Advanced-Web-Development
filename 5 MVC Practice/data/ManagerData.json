@@ -1,0 +1,26 @@
+[
+  {
+    "managerId": "mgr001",
+    "name": "Jake Park",
+    "email": "Jake.park@example.com",
+    "department": "Engineering"
+  },
+  {
+    "managerId": "mgr002",
+    "name": "david.choi",
+    "email": "david.choi@example.com",
+    "department": "Product"
+  },
+  {
+    "managerId": "mgr003",
+    "name": "Eun Kim",
+    "email": "eun.kim@example.com",
+    "department": "Marketing"
+  },
+  {
+    "managerId": "mgr004",
+    "name": "Frank Lee",
+    "email": "frank.lee@example.com",
+    "department": "Finance"
+  }
+]

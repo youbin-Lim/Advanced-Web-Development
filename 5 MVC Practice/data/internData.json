@@ -1,0 +1,30 @@
+[
+  {
+    "internId": "int001",
+    "name": "Liam Carter",
+    "email": "liam.carter@example.com",
+    "department": "Engineering",
+    "mentor": "Jake Park"
+  },
+  {
+    "internId": "int002",
+    "name": "Mia Johnson",
+    "email": "mia.johnson@example.com",
+    "department": "Product",
+    "mentor": "Dwight Fairfield"
+  },
+  {
+    "internId": "int003",
+    "name": "Noah Patel",
+    "email": "noah.patel@example.com",
+    "department": "Marketing",
+    "mentor": "Olivia Green"
+  },
+  {
+    "internId": "int004",
+    "name": "Ava Kim",
+    "email": "ava.kim@example.com",
+    "department": "Finance",
+    "mentor": "Liam Carter"
+  }
+]

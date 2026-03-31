@@ -1,11 +1,17 @@
 const express = require('express');
 const app = express();
-const studentRoutes = require('./routes/studentRoutes');
+const managerRoutes = require('./routes/managerRoutes');
+const internRoutes = require('./routes/internRoutes');
+const developerRoutes = require('./routes/developerRoutes');
 
 app.use(express.json());
+
 app.get('/', (req, res) => {
-  res.send('Student API is running');
+  res.send('API is running');
 });
-app.use('/api', studentRoutes);
+
+app.use('/mapi', managerRoutes);
+app.use('/iapi', internRoutes);
+app.use('/dapi', developerRoutes);
 
 module.exports = app;
