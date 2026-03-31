@@ -1,4 +1,4 @@
-const { getStudents, saveStudents } = require('../data/studentData');
+const { getStudents, saveStudents } = require('../models/studentData');
 
 // Add student
 exports.addStudent = (req, res, next) => {
