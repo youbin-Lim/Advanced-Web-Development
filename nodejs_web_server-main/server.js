@@ -42,7 +42,7 @@ const serveFile = async (filePath, contentType, response) => {
 }
 
 const server = http.createServer((req, res) => {
-    // write the log file
+    // write the message to console
     console.log(req.url, req.method);
     console.log("Lim youbin");
     //emit
